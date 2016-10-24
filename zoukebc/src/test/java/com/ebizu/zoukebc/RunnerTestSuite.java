@@ -24,10 +24,10 @@ public class RunnerTestSuite extends SerenityStories {
         //<editor-fold>
         {
             //TEST
-//        	storyMap.addWhiteListPackage(STORY_PACKAGE + LOGIN);
-//        	storyMap.addWhiteListPackage(STORY_PACKAGE + PROMO);
-//        	storyMap.addWhiteListPackage(STORY_PACKAGE + EVENTS);
-//        	storyMap.addWhiteListPackage(STORY_PACKAGE + PRODUCTS);
+        	storyMap.addWhiteListPackage(STORY_PACKAGE + LOGIN);
+        	storyMap.addWhiteListPackage(STORY_PACKAGE + PROMO);
+        	storyMap.addWhiteListPackage(STORY_PACKAGE + EVENTS);
+        	storyMap.addWhiteListPackage(STORY_PACKAGE + PRODUCTS);
         	storyMap.addWhiteListPackage(STORY_PACKAGE + ROOMS);
 
 

@@ -1249,7 +1249,7 @@ public class EbcSteps {
 	public void assertSaveTable(){
 		homePage.waitFor(homePage.notifsaveproduct);
 		String notif=homePage.notifsaveproduct.getTextValue();
-		
+		System.out.println(notif);
 		if(notif.contains("Your desk data has been saved!" )){
 			assert true;
 		}
@@ -1289,4 +1289,236 @@ public class EbcSteps {
 			assert false;
 		}
 	}
+	
+	//this is the end of delete table
+	
+	@Step
+	public void clickTableSetting(){
+		homePage.tablesettingmenu.click();
+	}
+	@Step
+	public void selectRoomTS(String room){
+		homePage.tsroom.click();
+		homePage.searchdropdown.typeAndEnter(room);
+	}
+	@Step
+	public void selectTableTS(String table){
+		String[] parts = table.split("@");
+		String part1 = parts[0]; 
+		String part2 = parts[1]; 
+		String part0 = part1.substring(0,2);
+		int no = 0;
+		
+		homePage.tstable.click();
+		while(no!=7){
+			no++;
+			String tables=String.valueOf(part0+no+" @"+part2);
+		homePage.tstable.sendKeys(tables);
+		homePage.tstable.sendKeys(Keys.RETURN);
+		}
+	}
+	@Step
+	public void insertStartDateTS(String startdate){
+		homePage.tsstartdate.typeAndEnter(startdate);
+	}
+	@Step
+	public void insertEndDateTS(String enddate){
+		homePage.tsenddate.typeAndEnter(enddate);
+	}
+	@Step 
+	public void insertOpenDayTS(String openday){
+		homePage.tsopendays.click();
+		homePage.selectall.click();
+	}
+	@Step
+	public void insertMinBottle(String minbottle){
+		homePage.tsminbottle.type(minbottle);
+	}
+	@Step
+	public void clickSaveTS(){
+		homePage.tssavebtn.click();
+	}
+	@Step
+	public void checkTableCalendar(String startdate ,String room, String minbottle)throws Exception{
+		homePage.tstablecal.click();
+		homePage.searchdropdown.typeAndEnter(room);
+		Thread.sleep(5000);
+		String xinit = "//div[@id='calendar']/div[2]/div/table/tbody/tr/td/div/div/div[4]/div[2]/table/thead/tr/td";
+		String yinit = "//div[@id='calendar']/div[2]/div/table/tbody/tr/td/div/div/div[5]/div[2]/table/thead/tr/td";
+		String firstpath = "//div[@id='calendar']/div[2]/div/table/tbody/tr/td/div/div/div[";
+		String scndpath = "]/div[2]/table/thead/tr/td[";
+		String closed="]"	;
+		int middle = 4;
+		int end = 1;
+		String find = firstpath+middle+scndpath+end+closed;
+		String element1 = homePage.getDriver().findElement(By.xpath(find)).getText();
+		String elementx = homePage.getDriver().findElement(By.xpath(xinit)).getText();
+		String elementy = homePage.getDriver().findElement(By.xpath(yinit)).getText();
+		String getdate = startdate.substring(0,2);
+		System.out.println(getdate);
+		if(elementx.equals(getdate)){
+			String gothca = String.valueOf( xinit+"/a/div/span").replace("thead", "tbody");
+			homePage.getDriver().findElement(By.xpath(gothca)).click();
+			
+		}
+		else if(elementy.equals(getdate)){
+			String gothca = String.valueOf( yinit+"/a/div/span").replace("thead", "tbody");
+			homePage.getDriver().findElement(By.xpath(gothca)).click();
+			
+		}
+		else{
+			while (!element1.equalsIgnoreCase (getdate)){
+			end++;
+			find= firstpath+middle+scndpath+end+closed;
+			 element1 = homePage.getDriver().findElement(By.xpath(find)).getText();
+			 System.out.println(element1);
+			 if(end == 7){
+				 end = 1;
+				 middle=5;
+			 }
+			 if(middle==5 && end==7){element1 = homePage.getDriver().findElement(By.xpath(find)).getText();}
+			
+			}
+			String gothca = String.valueOf( find+"/a/div/span").replace("thead", "tbody");
+			Thread.sleep(5000);
+			homePage.getDriver().findElement(By.xpath(gothca)).click();
+			Thread.sleep(5000);
+			System.out.println(homePage.getDriver().findElement(By.xpath(gothca)).getText());
+			if(homePage.getDriver().findElement(By.xpath(gothca)).getText().contains(minbottle)){
+				assert true;
+			}
+			else{
+				assert false;
+			}
+		}
+	}
+	
+	//this is the end of new table setting
+	
+	@Step 
+	public void selectRoomTableCal(String room){
+		homePage.tstablecal.click();
+		homePage.searchdropdown.typeAndEnter(room);
+	}
+	@Step
+	public void editTableCalendar(String startdate ,String room)throws Exception{
+		Thread.sleep(5000);
+		String xinit = "//div[@id='calendar']/div[2]/div/table/tbody/tr/td/div/div/div[4]/div[2]/table/thead/tr/td";
+		String yinit = "//div[@id='calendar']/div[2]/div/table/tbody/tr/td/div/div/div[5]/div[2]/table/thead/tr/td";
+		String firstpath = "//div[@id='calendar']/div[2]/div/table/tbody/tr/td/div/div/div[";
+		String scndpath = "]/div[2]/table/thead/tr/td[";
+		String closed="]"	;
+		int middle = 4;
+		int end = 1;
+		String find = firstpath+middle+scndpath+end+closed;
+		String element1 = homePage.getDriver().findElement(By.xpath(find)).getText();
+		String elementx = homePage.getDriver().findElement(By.xpath(xinit)).getText();
+		String elementy = homePage.getDriver().findElement(By.xpath(yinit)).getText();
+		String getdate = startdate.substring(0,2);
+		System.out.println(getdate);
+		if(elementx.equals(getdate)){
+			String gothca = String.valueOf( xinit+"/a/div/span").replace("thead", "tbody");
+			homePage.getDriver().findElement(By.xpath(gothca)).click();
+			
+		}
+		else if(elementy.equals(getdate)){
+			String gothca = String.valueOf( yinit+"/a/div/span").replace("thead", "tbody");
+			homePage.getDriver().findElement(By.xpath(gothca)).click();
+			
+		}
+		else{
+			while (!element1.equalsIgnoreCase (getdate)){
+			end++;
+			find= firstpath+middle+scndpath+end+closed;
+			 element1 = homePage.getDriver().findElement(By.xpath(find)).getText();
+			 System.out.println(element1);
+			 if(end == 7){
+				 end = 1;
+				 middle=5;
+			 }
+			 if(middle==5 && end==7){element1 = homePage.getDriver().findElement(By.xpath(find)).getText();}
+			
+			}
+			String gothca = String.valueOf( find+"/a/div/span").replace("thead", "tbody");
+			Thread.sleep(3000);
+			homePage.getDriver().findElement(By.xpath(gothca)).click();
+			System.out.println(homePage.getDriver().findElement(By.xpath(gothca)).getText());
+		}
+	}
+	@Step
+	public void editminbottle(String minbottle){
+		homePage.minbottlepopup.clear();
+		homePage.minbottlepopup.type(minbottle);
+	}
+	
+	//this is the end of edit table setting
+	
+	@Step
+	public void deleteTableCalendar(String startdate ,String room,String minbottle)throws Exception{
+		Thread.sleep(5000);
+		String xinit = "//div[@id='calendar']/div[2]/div/table/tbody/tr/td/div/div/div[4]/div[2]/table/thead/tr/td";
+		String yinit = "//div[@id='calendar']/div[2]/div/table/tbody/tr/td/div/div/div[5]/div[2]/table/thead/tr/td";
+		String firstpath = "//div[@id='calendar']/div[2]/div/table/tbody/tr/td/div/div/div[";
+		String scndpath = "]/div[2]/table/thead/tr/td[";
+		String closed="]"	;
+		int middle = 4;
+		int end = 1;
+		String find = firstpath+middle+scndpath+end+closed;
+		String element1 = homePage.getDriver().findElement(By.xpath(find)).getText();
+		String elementx = homePage.getDriver().findElement(By.xpath(xinit)).getText();
+		String elementy = homePage.getDriver().findElement(By.xpath(yinit)).getText();
+		String getdate = startdate.substring(0,2);
+		System.out.println(getdate);
+		if(elementx.equals(getdate)){
+			String gothca = String.valueOf( xinit+"/a/div/span").replace("thead", "tbody");
+			homePage.getDriver().findElement(By.xpath(gothca)).click();
+			
+		}
+		else if(elementy.equals(getdate)){
+			String gothca = String.valueOf( yinit+"/a/div/span").replace("thead", "tbody");
+			homePage.getDriver().findElement(By.xpath(gothca)).click();
+			
+		}
+		else{
+			while (!element1.equalsIgnoreCase (getdate)){
+			end++;
+			find= firstpath+middle+scndpath+end+closed;
+			 element1 = homePage.getDriver().findElement(By.xpath(find)).getText();
+			 System.out.println(element1);
+			 if(end == 7){
+				 end = 1;
+				 middle=5;
+			 }
+			 if(middle==5 && end==7){element1 = homePage.getDriver().findElement(By.xpath(find)).getText();}
+			
+			}
+			String gothca = String.valueOf( find+"/a/div/span").replace("thead", "tbody");
+			Thread.sleep(5000);
+			
+			//System.out.println(homePage.getDriver().findElement(By.xpath(gothca)).getText());
+//			if(homePage.getDriver().findElement(By.xpath(gothca)).getText().contains(minbottle)){
+//				assert true;
+//			}
+//			else{
+//				assert false;
+//			}
+			Boolean isPresent = homePage.getDriver().findElements(By.xpath(gothca)).isEmpty();
+			
+
+			while(!isPresent.equals(true)){
+				Thread.sleep(5000);
+				isPresent = homePage.getDriver().findElements(By.xpath(gothca)).isEmpty();
+				if(isPresent.equals(true)){
+					break;
+				}
+				System.out.print(isPresent);
+			homePage.getDriver().findElement(By.xpath(gothca)).click();
+			homePage.deletepopupbtn.click();
+			Thread.sleep(5000);
+			}
+			
+		}
+	}
+	
+	
 }

@@ -382,4 +382,30 @@ public class HomePage extends PageObject {
 	     @FindBy(name="DeskSearch[desk_name]")
 	     public WebElementFacade searchtablebyname;
 	     
+	     //this is the end of edit and delete table
+	     
+	     @FindBy(linkText="Table Setting")
+	     public WebElementFacade tablesettingmenu;
+	     @FindBy(id="select2-w0-container")
+	     public WebElementFacade tsroom;
+	     @FindBy(css="input.select2-search__field")
+	     public WebElementFacade tstable;
+	     @FindBy(id="w2")
+	     public WebElementFacade tsstartdate;
+	     @FindBy(id="w3")
+	     public WebElementFacade tsenddate;
+	     @FindBy(xpath="(//input[@type='search'])[2]")
+	     public WebElementFacade tsopendays;
+	     @FindBy(name="min_bottle_default")
+	     public WebElementFacade tsminbottle;
+	     @FindBy(name="save_form-desk-manage")
+	     public WebElementFacade tssavebtn;
+	     @FindBy(id="select2-w5-container")
+	     public WebElementFacade tstablecal;
+	     
+	     //this is the end of new table setting
+	     
+	     @FindBy(id="min_bottle_default")
+	     public WebElementFacade minbottlepopup;
+	     
 }

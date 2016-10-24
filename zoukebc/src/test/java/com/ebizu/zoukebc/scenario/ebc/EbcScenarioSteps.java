@@ -786,8 +786,9 @@ public class EbcScenarioSteps {
 		 ebcSteps.insertTableType(type);
 	 }
 	 @When ("click save table")
-	 public void clickSaveTable(){
+	 public void clickSaveTable()throws Exception{
 		 ebcSteps.clickSaveTable();
+		 Thread.sleep(5000);
 	 }
 	 @Then ("save table success")
 	 public void assertSaveTable(){
@@ -814,5 +815,66 @@ public class EbcScenarioSteps {
 	 @Then ("delete table success")
 	 public void assertDeleteTable(){
 		 ebcSteps.assertDeleteTable();
+	 }
+	 
+	 // this is the end of delete table
+	 @Given ("click table setting menu")
+	 public void clickTableSetting(){
+		 ebcSteps.clickTableSetting();
+	 }
+	 @When ("select table setting room <$room>")
+	 public void selectRoomTS(String room){
+		 ebcSteps.selectRoomTS(room);
+	 }
+	 @When ("select table setting table <$table>")
+	 public void selectTableTS(String table){
+		 ebcSteps.selectTableTS(table);
+	 }
+	 @When ("insert table setting start date <$startdate>")
+	 public void insertStartDateTS(String startdate){
+		 ebcSteps.insertStartDateTS(startdate);
+	 }
+	 
+	 @When ("insert table setting end date <$enddate>")
+	 public void insertEndDateTS(String enddate){
+		 ebcSteps.insertEndDateTS(enddate);
+	 }
+	 @When ("insert table setting open days <$openday>")
+	 public void insertOpenDayTS(String openday){
+		 ebcSteps.insertOpenDayTS(openday);
+	 }
+	 @When ("insert table setting minimum bottle <$minbottle>")
+	 public void insertMinBottle(String minbottle){
+		 ebcSteps.insertMinBottle(minbottle);
+	 }
+	 @When ("click save table setting")
+	 public void clickSaveTS(){
+		 ebcSteps.clickSaveTS();
+	 }
+	 @When("check on table calendar <$startdate> <$room> <$minbottle>")
+	 public void checkTableCalendar(String startdate, String room, String minbottle)throws Exception{
+		 ebcSteps.checkTableCalendar(startdate, room, minbottle);
+	 }
+	 
+	 //this is the end of new table setting
+	 @Given ("choose room for table calendar <$room>")
+	 public void selectRoomTableCal(String room){
+		 ebcSteps.selectRoomTableCal(room);
+	 }
+	 @When ("click edit on table calendar <$startdate> <$room>")
+	 public void clickEditTableSetting(String startdate,String room)throws Exception{
+		 ebcSteps.editTableCalendar(startdate, room);
+	 }
+	 @When("edit table setting minimum bottle <$minbottle>")
+	 public void editMinBottle(String minbottle)throws Exception{
+		 ebcSteps.editminbottle(minbottle);
+		 Thread.sleep(3000);
+	 }
+	 
+	 //this is the end of edit table setting
+	 
+	 @When("click delete on table calendar <$startdate> <$room>  <$minbottle>")
+	 public void deleteTableSetting(String startdate,String room,String minbottle )throws Exception{
+		 ebcSteps.deleteTableCalendar(startdate, room,minbottle);
 	 }
 }
